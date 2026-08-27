@@ -1,0 +1,462 @@
+/* =====================================================
+   DESIGN TOKENS
+   Palette: cream base, pink / lavender / sky gradients,
+   plum text for contrast, coral for calls-to-action.
+   ===================================================== */
+:root {
+  --cream:        #FFF8F2;
+  --pink:         #FFC9DE;
+  --pink-deep:    #FF9EC4;
+  --lavender:     #C9B6F5;
+  --sky:          #AEE3F5;
+  --plum:         #4A3A63;
+  --plum-soft:    #7A6693;
+  --coral:        #FF7FA6;
+  --coral-deep:   #FF5C8D;
+  --glass-bg:     rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --shadow-soft:  0 20px 60px rgba(120, 90, 160, 0.18);
+  --font-display: 'Fredoka', system-ui, sans-serif;
+  --font-body:    'Quicksand', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--plum);
+  background: linear-gradient(180deg, var(--cream) 0%, #FFF1F6 25%, #F3ECFC 55%, #EAF7FC 100%);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.hidden { display: none !important; }
+
+/* =====================================================
+   SHARED LAYOUT
+   ===================================================== */
+.screen {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  position: relative;
+}
+
+.glass-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 28px;
+  padding: 36px 28px;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  color: var(--plum);
+  margin: 0 0 18px;
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-display);
+  font-weight: 500;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 24px rgba(255, 92, 141, 0.25);
+}
+.btn:active { transform: scale(0.96); }
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--coral), var(--lavender));
+  color: white;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--sky), var(--pink));
+  color: var(--plum);
+}
+
+.btn-mini {
+  background: white;
+  color: var(--plum);
+  border: 2px solid var(--pink-deep);
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  box-shadow: none;
+}
+
+/* =====================================================
+   1. LANDING SCREEN
+   ===================================================== */
+.landing {
+  background: radial-gradient(circle at 30% 20%, var(--pink) 0%, transparent 55%),
+              radial-gradient(circle at 80% 80%, var(--sky) 0%, transparent 55%),
+              radial-gradient(circle at 50% 50%, var(--lavender) 0%, transparent 60%),
+              var(--cream);
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+}
+
+.landing-content {
+  position: relative;
+  z-index: 2;
+  animation: gentleRise 1s ease both;
+}
+
+@keyframes gentleRise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--plum-soft);
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 10vw, 3.6rem);
+  margin: 0 0 12px;
+  color: var(--plum);
+}
+
+.heart-pop {
+  display: inline-block;
+  animation: pop 1.6s ease-in-out infinite;
+}
+@keyframes pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2) rotate(-6deg); }
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  color: var(--plum-soft);
+  margin-bottom: 32px;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4rem;
+  color: var(--plum-soft);
+  animation: bounce 1.8s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+}
+
+/* Sparkle field on landing */
+.sparkle-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px rgba(255,255,255,0.9);
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* =====================================================
+   2. PHOTO SECTION
+   ===================================================== */
+.photo-card { padding-bottom: 32px; }
+
+.polaroid-frame {
+  background: white;
+  padding: 14px 14px 24px;
+  border-radius: 16px;
+  box-shadow: 0 14px 30px rgba(120, 90, 160, 0.25);
+  transform: rotate(-2deg);
+  margin-bottom: 22px;
+  display: inline-block;
+}
+
+.kavii-photo {
+  width: 100%;
+  max-width: 320px;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.quote-text {
+  font-size: 1.05rem;
+  color: var(--plum-soft);
+  font-style: italic;
+  margin: 0;
+}
+
+/* =====================================================
+   3. HOSTEL SECTION
+   ===================================================== */
+.survival-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  text-align: left;
+}
+.survival-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 6px;
+  border-bottom: 1px dashed rgba(122, 102, 147, 0.25);
+  font-size: 0.95rem;
+}
+.survival-list li:last-child { border-bottom: none; }
+.survival-list strong { color: var(--coral-deep); }
+.critical { color: #E0506E; }
+.legendary { color: #8B5FD9; }
+
+.mood-output {
+  margin-top: 18px;
+  font-weight: 600;
+  min-height: 24px;
+  color: var(--coral-deep);
+}
+
+/* =====================================================
+   4. MINI GAME
+   ===================================================== */
+.game-card { padding-bottom: 20px; }
+.game-instructions { color: var(--plum-soft); margin-bottom: 6px; }
+.game-score {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+
+.game-area {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin-top: 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+  border: 2px dashed rgba(122, 102, 147, 0.3);
+  overflow: hidden;
+}
+
+.game-heart {
+  position: absolute;
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  animation: heartAppear 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(255, 92, 141, 0.4));
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 4px;
+}
+@keyframes heartAppear {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.game-win {
+  margin-top: 18px;
+  animation: gentleRise 0.6s ease both;
+}
+.win-text {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--coral-deep);
+  margin: 0 0 6px;
+}
+.win-subtext { color: var(--plum-soft); margin: 0; }
+
+/* =====================================================
+   5. HOME MISS YOU SECTION
+   ===================================================== */
+.emotional-text {
+  color: var(--plum-soft);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.typewriter-line {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--coral-deep);
+  min-height: 1.6em;
+  border-right: 2px solid var(--coral-deep);
+  white-space: pre-wrap;
+  display: inline-block;
+}
+
+/* =====================================================
+   6. DEV'S SECRET MESSAGE
+   ===================================================== */
+.secret-card { min-height: 320px; display: flex; flex-direction: column; justify-content: center; }
+.lock-icon { font-size: 2.6rem; margin-bottom: 6px; }
+.secret-message {
+  text-align: left;
+  line-height: 1.7;
+  color: var(--plum-soft);
+  animation: unlockReveal 0.8s ease both;
+}
+@keyframes unlockReveal {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.secret-message p { margin: 0 0 14px; }
+.signature {
+  text-align: right;
+  font-family: var(--font-display);
+  color: var(--coral-deep);
+  font-size: 1.1rem;
+}
+
+/* =====================================================
+   7. FUNNY BUTTON SECTION
+   ===================================================== */
+.funny-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* =====================================================
+   8. FINAL SURPRISE
+   ===================================================== */
+.final-card { padding-bottom: 34px; }
+.final-message {
+  margin-top: 22px;
+  text-align: left;
+  line-height: 1.7;
+  color: var(--plum-soft);
+  animation: gentleRise 0.8s ease both;
+}
+.final-message p { margin: 0 0 12px; }
+.big-line {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--coral-deep);
+  text-align: center;
+}
+.mission-text {
+  margin-top: 16px;
+  text-align: center;
+  font-family: var(--font-display);
+  color: var(--coral-deep);
+  font-size: 1.1rem;
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+.footer {
+  text-align: center;
+  padding: 32px 20px 48px;
+  color: var(--plum-soft);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+}
+
+/* =====================================================
+   AMBIENT FLOATING HEARTS (background layer)
+   ===================================================== */
+.ambient-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.floating-heart {
+  position: absolute;
+  bottom: -40px;
+  font-size: 1.4rem;
+  opacity: 0.55;
+  animation: floatUp linear forwards;
+}
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) translateX(var(--drift, 0px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* =====================================================
+   SOUND TOGGLE
+   ===================================================== */
+.sound-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* =====================================================
+   CONFETTI CANVAS
+   ===================================================== */
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Ensure all real content sits above ambient background layer */
+.screen, .footer, #mainContent { position: relative; z-index: 1; }

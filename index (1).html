@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>For Kavii, from Dev ❤️</title>
+<meta name="description" content="A tiny world made just for Kavii." />
+
+<!-- Google Fonts: Fredoka (rounded, warm display) + Quicksand (soft body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient floating hearts layer, always running gently in the background -->
+  <div class="ambient-hearts" id="ambientHearts" aria-hidden="true"></div>
+
+  <!-- Sound toggle, fixed corner -->
+  <button id="soundToggle" class="sound-toggle" aria-label="Toggle background music">🔇</button>
+
+  <!-- ============ 1. LANDING SCREEN ============ -->
+  <section id="landing" class="screen landing">
+    <div class="sparkle-field" aria-hidden="true"></div>
+    <div class="landing-content">
+      <p class="eyebrow">a tiny world, built for one person</p>
+      <h1 class="hero-title">Hey Kavii <span class="heart-pop">❤️</span></h1>
+      <p class="hero-subtitle">I made a tiny little world just for you...</p>
+      <button class="btn btn-primary" id="openSurpriseBtn">Open Your Surprise 🎁</button>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">↓</div>
+  </section>
+
+  <!-- Everything below is hidden until she opens the surprise -->
+  <div id="mainContent" class="main-content hidden">
+
+    <!-- ============ 2. PHOTO SECTION ============ -->
+    <section class="screen photo-section">
+      <div class="glass-card photo-card">
+        <div class="polaroid-frame">
+          <img src="kavii.png" alt="Kavii" class="kavii-photo" />
+        </div>
+        <p class="quote-text">One smile from you can make a normal day feel special.</p>
+      </div>
+    </section>
+
+    <!-- ============ 3. HOSTEL SECTION ============ -->
+    <section class="screen hostel-section">
+      <div class="glass-card">
+        <h2 class="card-title">Hostel Survival Mode 😭😂</h2>
+        <ul class="survival-list">
+          <li><span>Missing home?</span><strong>+100</strong></li>
+          <li><span>Missing home food?</span><strong>+1000</strong></li>
+          <li><span>Missing your bed?</span><strong class="critical">Critical level 🚨</strong></li>
+          <li><span>Still smiling?</span><strong class="legendary">LEGENDARY LEVEL 👑</strong></li>
+        </ul>
+        <button class="btn btn-secondary" id="hostelMoodBtn">Check My Hostel Mood</button>
+        <p class="mood-output" id="moodOutput" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ============ 4. MINI GAME ============ -->
+    <section class="screen game-section">
+      <div class="glass-card game-card">
+        <h2 class="card-title">Catch the Happiness ❤️</h2>
+        <p class="game-instructions">Catch 5 hearts before they disappear!</p>
+        <p class="game-score">Score: <span id="scoreValue">0</span> / 5</p>
+        <button class="btn btn-secondary" id="startGameBtn">Start Game</button>
+        <div class="game-area" id="gameArea" aria-hidden="true"></div>
+        <div class="game-win hidden" id="gameWin">
+          <p class="win-text">You did it! 🎉</p>
+          <p class="win-subtext">See? You can handle hostel life too 😌❤️</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. HOME MISS YOU SECTION ============ -->
+    <section class="screen home-section">
+      <div class="glass-card">
+        <h2 class="card-title">Missing Home? 🏠❤️</h2>
+        <p class="emotional-text">
+          I know hostel days can sometimes feel lonely.
+          You might miss your home, your people, your food,
+          your room and all those little things that feel normal at home.
+        </p>
+        <p class="emotional-text">But remember...</p>
+        <p class="emotional-text">Being away from home doesn't mean you are alone.</p>
+        <p class="typewriter-line" id="typewriterLine"></p>
+      </div>
+    </section>
+
+    <!-- ============ 6. DEV'S SECRET MESSAGE ============ -->
+    <section class="screen secret-section">
+      <div class="glass-card secret-card" id="secretCard">
+        <div class="lock-face" id="lockFace">
+          <p class="lock-icon">🔐</p>
+          <h2 class="card-title">Dev's Secret Message</h2>
+          <button class="btn btn-primary" id="unlockBtn">Unlock It ❤️</button>
+        </div>
+        <div class="secret-message hidden" id="secretMessage">
+          <p>Kavii,</p>
+          <p>I can't bring your home to the hostel,<br>
+          I can't magically make hostel food taste like home 😂,<br>
+          and I can't remove every bad day...</p>
+          <p>But I can remind you that someone is always cheering for you.</p>
+          <p>So whenever you feel homesick,<br>
+          take a deep breath, smile a little,<br>
+          and remember...</p>
+          <p>You don't have to handle everything alone.</p>
+          <p>I'm here for you.</p>
+          <p class="signature">— Dev ❤️</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. FUNNY BUTTON SECTION ============ -->
+    <section class="screen funny-section">
+      <div class="glass-card">
+        <h2 class="card-title">Quick Mood Fixer</h2>
+        <div class="funny-buttons">
+          <button class="btn btn-mini" data-mood="sad">Feeling Sad 😭</button>
+          <button class="btn btn-mini" data-mood="hungry">Feeling Hungry 🍕</button>
+          <button class="btn btn-mini" data-mood="home">Missing Home 🏠</button>
+        </div>
+        <p class="mood-output" id="funnyOutput" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ============ 8. FINAL SURPRISE ============ -->
+    <section class="screen final-section">
+      <div class="glass-card final-card">
+        <h2 class="card-title">One Last Thing...</h2>
+        <button class="btn btn-primary" id="finalOpenBtn">Open ❤️</button>
+        <div class="final-message hidden" id="finalMessage">
+          <p>Kavii ❤️</p>
+          <p>No matter how far you are from home,<br>
+          remember that you have someone wishing<br>
+          to see you smile every day.</p>
+          <p>Whenever hostel feels boring,<br>
+          whenever you miss home,<br>
+          whenever you have a bad day...</p>
+          <p>Just remember:</p>
+          <p class="big-line">DEV IS THERE FOR YOU. ❤️</p>
+          <p>Now smile. That's an order. 😌😂</p>
+          <button class="btn btn-secondary" id="okayDevBtn">Okay Dev 😂❤️</button>
+          <p class="mission-text hidden" id="missionText">Mission accomplished.<br>Kavii smiled. 😎❤️</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Made with ❤️ by Dev for Kavii
+    </footer>
+
+  </div>
+
+  <!-- Canvas for confetti bursts -->
+  <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
